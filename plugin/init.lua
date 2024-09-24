@@ -163,7 +163,12 @@ wez.on("update-status", function(window, pane)
     {
       name = "hostname",
       func = function()
-        return wez.hostname()
+        return pane:get_user_vars().hostname or pane:get_domain_name()
+      end,
+      style = function(hostname)
+        if not string.find(hostname, "local") then
+          return palette.brights
+        end
       end,
     },
     {
